@@ -1,0 +1,38 @@
+{
+  "name": "markdown-previewer",
+  "version": "1.0.0",
+  "description": " Build a Markdown Previewer | freeCodeCamp ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "css:scss": "node-sass --output-style compressed -o dist src/scss",
+    "css:autoprefixer": "postcss -u autoprefixer -r dist/*.css",
+    "css:lint": "stylelint src/scss/*.scss  --custom-syntax postcss-scss",
+    "build:css": "npm run css:lint && npm run css:scss && npm run css:autoprefixer",
+    "watch:css": "onchange \"src/scss\" -- npm run build:css",
+    "build:js": "webpack --mode=production",
+    "watch:js": "onchange \"src/js\" -- webpack --mode=development",
+    "serve": "browser-sync start --server \"dist\" --files \"dist\"",
+    "build:html": "posthtml -c posthtml.json",
+    "watch:html": "onchange \"src/views\" -- npm run build:html",
+    "watch": "run-p serve watch:*",
+    "build": "run-p build:*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thuyencode/markdown-previewer.git"
+  },
+  "author": "Thuyen Code",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/thuyencode/markdown-previewer/issues"
+  },
+  "homepage": "https://github.com/thuyencode/markdown-previewer#readme",
+  "devDependencies": {
+    "autoprefixer": "^10.4.14",
+    "dompurify": "^3.0.3",
+    "marked": "^5.0.2",
+    "node-sass": "^9.0.0",
+    "postcss-cli": "^10.1.0"
+  }
+}

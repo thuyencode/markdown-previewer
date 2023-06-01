@@ -6,7 +6,7 @@ const autoprefixer = require('autoprefixer')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const { PurgeCSSPlugin } = require("purgecss-webpack-plugin")
+const { PurgeCSSPlugin } = require('purgecss-webpack-plugin')
 
 const PATHS = {
   src: path.join(__dirname, 'src')
@@ -78,8 +78,8 @@ module.exports = {
         test: /\.(js|jsx)$/,
         exclude: /[\\/]node_modules[\\/]/,
         use: {
-          loader: 'babel-loader',
-        },
+          loader: 'babel-loader'
+        }
       }
     ]
   }

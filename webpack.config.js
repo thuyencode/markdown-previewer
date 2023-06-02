@@ -16,7 +16,7 @@ module.exports = {
   mode: 'development',
   entry: './src/js/main.js',
   output: {
-    filename: 'main.js',
+    filename: 'main.[contenthash].js',
     path: path.resolve(__dirname, 'dist')
   },
   devServer: {
@@ -32,7 +32,9 @@ module.exports = {
         collapseWhitespace: true
       }
     }),
-    new MiniCssExtractPlugin(),
+    new MiniCssExtractPlugin({
+      filename: '[name].[contenthash].css'
+    }),
     new PurgeCSSPlugin({
       paths: glob.sync(`${PATHS.src}/**/*`, { nodir: true })
     })

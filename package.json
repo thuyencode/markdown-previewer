@@ -28,6 +28,8 @@
     "css-loader": "^6.8.1",
     "dompurify": "^3.0.3",
     "html-webpack-plugin": "^5.5.1",
+    "jquery": "^3.7.0",
+    "jsdom": "^22.1.0",
     "marked": "^5.0.4",
     "mini-css-extract-plugin": "^2.7.6",
     "postcss-loader": "^7.3.2",

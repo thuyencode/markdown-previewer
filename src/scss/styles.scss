@@ -1,9 +1,0 @@
-// https://stackoverflow.com/a/75493299
-$bootstrap-icons-font-src: url("../../node_modules/bootstrap-icons/font/fonts/bootstrap-icons.woff2") format("woff2"), url("../../node_modules/bootstrap-icons/font/fonts/bootstrap-icons.woff") format("woff");
-@import "../../node_modules/bootstrap-icons/font/bootstrap-icons.scss";
-
-@import "bootstrap/scss/bootstrap";
-
-textarea {
-  resize: none;
-}

@@ -1,22 +1,21 @@
 'use strict'
 
 const path = require('path')
-const glob = require('glob')
 const autoprefixer = require('autoprefixer')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const { PurgeCSSPlugin } = require('purgecss-webpack-plugin')
-
-const PATHS = {
-  src: path.join(__dirname, 'src')
-}
 
 module.exports = {
-  mode: 'development',
-  entry: './src/js/main.js',
+  mode: 'production',
+  entry: {
+    main: './src/js/main.js',
+    md: './src/js/md-renderer.js',
+    styles: './src/js/styles.js',
+    selectors: './src/js/selectors.js'
+  },
   output: {
-    filename: 'main.[contenthash].js',
+    filename: '[name].bundle.[contenthash].js',
     path: path.resolve(__dirname, 'dist')
   },
   devServer: {
@@ -34,23 +33,16 @@ module.exports = {
     }),
     new MiniCssExtractPlugin({
       filename: '[name].[contenthash].css'
-    }),
-    new PurgeCSSPlugin({
-      paths: glob.sync(`${PATHS.src}/**/*`, { nodir: true })
     })
   ],
   module: {
     rules: [
       {
-        mimetype: 'image/svg+xml',
-        scheme: 'data',
-        type: 'asset/resource',
-        generator: {
-          filename: 'icons/[hash].svg'
-        }
+        test: /\.(svg|png|jpg|md)$/i,
+        type: 'asset/resource'
       },
       {
-        test: /\.(scss)$/,
+        test: /\.(css)$/,
         use: [
           {
             loader: MiniCssExtractPlugin.loader
@@ -69,10 +61,6 @@ module.exports = {
                 ]
               }
             }
-          },
-          {
-            // Loads a SASS/SCSS file and compiles it to CSS
-            loader: 'sass-loader'
           }
         ]
       },
@@ -84,5 +72,11 @@ module.exports = {
         }
       }
     ]
+  },
+  optimization: {
+    splitChunks: {
+      chunks: 'all'
+    },
+    runtimeChunk: 'single'
   }
 }

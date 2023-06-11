@@ -6,9 +6,11 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
+const TerserPlugin = require('terser-webpack-plugin')
 const CopyPlugin = require('copy-webpack-plugin')
 
 module.exports = {
+  target: 'web',
   mode: 'production',
   entry: {
     main: './src/js/main.js',
@@ -22,7 +24,7 @@ module.exports = {
   },
   devServer: {
     static: path.resolve(__dirname, 'dist'),
-    port: 8080,
+    port: 8000,
     hot: true
   },
   plugins: [
@@ -36,13 +38,13 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './src/index.html',
       minify: {
-        collapseWhitespace: true
+        collapseWhitespace: true,
+        removeComments: true
       }
     }),
     new MiniCssExtractPlugin({
       filename: 'css/[name].[contenthash].css'
     })
-    // new CompressionPlugin()
   ],
   module: {
     rules: [
@@ -89,7 +91,21 @@ module.exports = {
     runtimeChunk: 'single',
     minimize: true,
     minimizer: [
-      new CssMinimizerPlugin()
+      new CssMinimizerPlugin({
+        parallel: true,
+        minimizerOptions: {
+          preset: [
+            'default',
+            {
+              discardComments: { removeAll: true }
+            }
+          ]
+        }
+      }),
+      new TerserPlugin({
+        extractComments: false,
+        parallel: true
+      })
     ]
   }
 }

@@ -1,12 +1,6 @@
 import { editor, preview, uploadButton, saveButton, fileSelector, togglePreview } from './selectors'
-// import { md } from './md-renderer'
+import { md } from './md-renderer'
 import { CHEVRON_DOUBLE_LEFT, CHEVRON_DOUBLE_RIGHT } from './icons'
-import DOMPurify from 'dompurify'
-import { marked } from 'marked'
-
-marked.use({
-  breaks: true
-})
 
 // Limit up to 30.000 characters
 const LIMIT = 30000
@@ -16,7 +10,7 @@ let timeOut
 // The #preview is hidden by default on mobile
 // Only sync scrolling on Laptop/PC
 if (window.getComputedStyle(preview).display !== 'none') {
-  document.querySelector('#editor').addEventListener('scroll', function callback(event) {
+  document.querySelector('#editor').addEventListener('scroll', function callback (event) {
     event.stopPropagation()
 
     clearTimeout(timeOut)
@@ -104,7 +98,7 @@ fileSelector.addEventListener('change', (event) => {
     // And render to Markdown
     (async () => {
       editor.value = await readFile(mdFile)
-      preview.innerHTML = DOMPurify.sanitize(marked.parse(editor.value.replace(/^[\u200B\u200C\u200D\u200E\u200F\uFEFF]/, '')))
+      preview.innerHTML = md.render(editor.value)
     })()
   }
 })
@@ -113,7 +107,7 @@ fileSelector.addEventListener('change', (event) => {
 editor.addEventListener('input', (event) => {
   event.stopPropagation()
   console.log('input')
-  preview.innerHTML = DOMPurify.sanitize(marked.parse(editor.value.replace(/^[\u200B\u200C\u200D\u200E\u200F\uFEFF]/, '')))
+  preview.innerHTML = md.render(editor.value)
 })
 
 // Display #preview button on small screen or tablet screen
@@ -162,5 +156,5 @@ fetch('docs/markdown-cheat-sheet.md')
   })
   .then((content) => {
     editor.value = content
-    preview.innerHTML = DOMPurify.sanitize(marked.parse(editor.value.replace(/^[\u200B\u200C\u200D\u200E\u200F\uFEFF]/, '')))
+    preview.innerHTML = md.render(editor.value)
   })

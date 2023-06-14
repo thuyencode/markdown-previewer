@@ -20,6 +20,7 @@ git clone https://github.com/thuyencode/markdown-previewer
 cd markdown-previewer
 npm init && npm run build
 ```
+
 If you want live preview:
 ```
 npm run start

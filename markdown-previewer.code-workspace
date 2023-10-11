@@ -13,6 +13,33 @@
     },
     "editor.quickSuggestions": {
       "strings": true
-    }
+    },
+    "tailwindCSS.emmetCompletions": true,
+    "tailwindCSS.classAttributes": [
+      "class",
+      "className",
+      "ngClass",
+      "defaultProps",
+      "styles"
+    ],
+    "cSpell.words": [
+      "clsx",
+      "dompurify",
+      "Gemoji",
+      "Katex",
+      "rehype",
+      "supersub"
+    ]
+  },
+  "extensions": {
+    "recommendations": [
+      "idered.npm",
+      "christian-kohler.npm-intellisense",
+      "moalamri.inline-fold",
+      "dbaeumer.vscode-eslint",
+      "formulahendry.auto-rename-tag",
+      "bradlc.vscode-tailwindcss",
+      "zignd.html-css-class-completion"
+    ]
   }
 }

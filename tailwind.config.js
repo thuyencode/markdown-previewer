@@ -1,8 +1,10 @@
+import innerBorderPlugin from 'tailwindcss-inner-border'
+
 /** @type {import('tailwindcss').Config} */
-module.exports = {
-  content: ['./src/**/*.{html,js}'],
+export default {
+  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
-    extend: {}
+    extend: {},
   },
-  plugins: []
+  plugins: [innerBorderPlugin],
 }

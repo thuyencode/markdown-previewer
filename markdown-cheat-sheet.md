@@ -67,7 +67,7 @@ These elements extend the basic syntax by adding additional features. Not all Ma
 
 ### Fenced Code Block
 
-```
+```javascript
 {
   "firstName": "John",
   "lastName": "Smith",
@@ -90,7 +90,7 @@ Here's a sentence with a footnote. [^1]
 term
 : definition
 
-### Strikethrough
+### Strike through
 
 ~~The world is flat.~~
 
